@@ -1,5 +1,7 @@
 package com.sales.controllers;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,8 +35,9 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value= "/productAdded.html", method=RequestMethod.GET)
-	public String productAddedGET(@ModelAttribute("product") Product product) {
-		
+	public String productAddedGET(Model model) {
+		ArrayList<Product> products = ps.getAllProducts();
+		model.addAttribute("products", products);
 		return "showProducts";
 	}
 }

@@ -1,5 +1,7 @@
 package com.sales.services;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,5 +15,9 @@ public class ProductService {
 	
 	public void saveProduct(Product prod) {
 		pi.save(prod);
+	}
+	
+	public ArrayList<Product> getAllProducts() {
+		return (ArrayList<Product>) pi.findAll();
 	}
 }
