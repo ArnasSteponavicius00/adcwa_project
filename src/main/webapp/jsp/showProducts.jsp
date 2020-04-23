@@ -7,6 +7,6 @@
 <title>Show Products</title>
 </head>
 <body>
-<h1>Added Product ${product.pId}, ${product.pDesc}, ${product.qtyInStock}</h1>
+	<h1>Added Product ${product.pId}, ${product.pDesc}, ${product.qtyInStock} added to DB</h1>
 </body>
 </html>

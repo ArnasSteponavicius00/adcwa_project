@@ -1,5 +1,6 @@
 package com.sales.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -8,13 +9,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.sales.models.Product;
+import com.sales.services.ProductService;
 
 @Controller
 @SessionAttributes("product")
 public class ProductController {
+	@Autowired
+	ProductService ps;
 	
 	@RequestMapping(value= "/addProduct.html", method=RequestMethod.GET)
-	public String addProductGET(Model model){
+	public String addProductGET(Model model) {
 		Product prod = new Product();
 		model.addAttribute("product", prod);
 		
@@ -22,13 +26,14 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value= "/addProduct.html", method=RequestMethod.POST)
-	public String addProductPOST(@ModelAttribute("product") Product product){
+	public String addProductPOST(@ModelAttribute("product") Product product) {
 		System.out.println("Product: "+ product.getpId() + " " + product.getpDesc() + " " +  product.getQtyInStock());
+		ps.saveProduct(product);
 		return "redirect:productAdded.html";
 	}
 	
 	@RequestMapping(value= "/productAdded.html", method=RequestMethod.GET)
-	public String productAddedGET(@ModelAttribute("product") Product product){
+	public String productAddedGET(@ModelAttribute("product") Product product) {
 		
 		return "showProducts";
 	}
