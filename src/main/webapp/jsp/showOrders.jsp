@@ -5,16 +5,25 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Show Products</title>
+<title>Show Orders</title>
 </head>
 <body>
-	<h1>Added Order: ${order.oId} | ${order.qty} | ${order.orderDate} was added to DB</h1>
 	<h3>List of Orders:</h3>
-	
-	<ol>
-		<c:forEach items="${orders}" var="order">
-			<li>${order.oId} | ${order.qty} | ${order.orderDate}</li>
-		</c:forEach>
-	</ol>
+	<table>
+	  <tr>
+	   <th>Order ID</th>
+	   <th>Quantity</th>
+	   <th>Order Date</th>
+	  </tr>
+		<tr>
+			<c:forEach items="${orders}" var="order">
+				<tr>
+					<td>${order.oId}</td>
+					<td>${order.qty}</td>
+					<td>${order.orderDate}</td>
+				</tr>
+			</c:forEach>
+		</tr>
+	</table>
 </body>
 </html>

@@ -8,13 +8,23 @@
 <title>Show Products</title>
 </head>
 <body>
-	<h1>Added Product: ${product.pDesc} | ${product.qtyInStock} was added to DB</h1>
 	<h3>List of Products:</h3>
-	
-	<ol>
-		<c:forEach items="${products}" var="product">
-			<li>${product.pDesc} | ${product.qtyInStock}</li>
-		</c:forEach>
-	</ol>
+	<table>
+	  <tr>
+	   <th>Product ID</th>
+	   <th>Description</th>
+	   <th>Quantity in Stock</th>
+	  </tr>
+	  <tr>
+	    <c:forEach items="${products}" 
+	                 var="product">
+	      <tr> 
+	        <td>${product.pId}</td>
+	        <td>${product.pDesc}</td>
+	        <td>${product.qtyInStock}</td>
+	      </tr>
+	    </c:forEach>
+	  </tr>
+	</table>
 </body>
 </html>

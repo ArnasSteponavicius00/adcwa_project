@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.sales.models.Product;
@@ -29,7 +30,6 @@ public class ProductController {
 	
 	@RequestMapping(value= "/addProduct.html", method=RequestMethod.POST)
 	public String addProductPOST(@ModelAttribute("product") Product product) {
-		System.out.println("Product: "+ product.getpId() + " " + product.getpDesc() + " " +  product.getQtyInStock());
 		ps.saveProduct(product);
 		return "redirect:showProducts.html";
 	}

@@ -9,7 +9,6 @@
 </head>
 <body>
 	<h3>List of Customers:</h3>
-	
 	<table>
 	  <tr>
 	   <th>Customer ID</th>

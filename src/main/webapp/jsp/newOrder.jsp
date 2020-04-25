@@ -13,8 +13,22 @@
 <form:form modelAttribute="order">
   <table>
     <tr>
-      <td>Customer Name:</td>
-      <td><form:input path="cName"></form:input></td>
+      <td>Customer:</td>
+      <td>
+      	<form:select path="cust" items="${customers}"/>
+      </td>
+    </tr>
+    <tr>
+      <td>Product:</td>
+      <td>
+      	<form:select path="prod" items="${products}"/>
+      </td>
+    </tr>
+    <tr>
+      <td>Quantity:</td>
+      <td>
+      	<form:input path="qty"></form:input>
+      </td>
     </tr>
     <tr>
       <td colspan="2">
