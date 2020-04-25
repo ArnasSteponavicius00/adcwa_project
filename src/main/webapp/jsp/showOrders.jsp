@@ -9,21 +9,25 @@
 </head>
 <body>
 	<h3>List of Orders:</h3>
-	<table>
-	  <tr>
-	   <th>Order ID</th>
-	   <th>Quantity</th>
-	   <th>Order Date</th>
-	  </tr>
-		<tr>
-			<c:forEach items="${orders}" var="order">
-				<tr>
-					<td>${order.oId}</td>
-					<td>${order.qty}</td>
-					<td>${order.orderDate}</td>
-				</tr>
-			</c:forEach>
-		</tr>
-	</table>
+		<c:forEach items="${orders}" 
+	                 var="order">      
+		<h3>${order.oId}</h3>
+		<table>
+		  	<tr>
+	    		<th>Order ID</th>
+	    		<th>Order Quantity</th>
+	    		<th>Order Date</th>
+	    		<th>Description</th>
+	  		</tr>
+	  			<tr>
+	  				<td>${order.qty}</td>
+	  				<td>${order.orderDate}</td>
+	  				<td>${order.cust.cId}</td>
+	  				<td>${order.cust.cName}</td>
+	  				<td>${order.prod.pId}</td>
+	  				<td>${order.prod.pDesc}</td>
+	  			</tr>
+	  	</table>
+	  </c:forEach>
 </body>
 </html>
