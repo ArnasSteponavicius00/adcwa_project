@@ -29,6 +29,7 @@
 			</tr>
 		</table>
 	</form:form>
+	
 	<a href="/index.html">Home</a>
 	<a href="/showCustomers.html">List Customer</a>
 	<a href="/showProducts.html">List Products</a>

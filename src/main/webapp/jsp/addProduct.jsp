@@ -25,6 +25,7 @@
 			</tr>
 		</table>
 	</form:form>
+	
 	<a href="/index.html">Home</a>
 	<a href="/showOrders.html">List Orders</a>
 	<a href="/showProducts.html">List Products</a>

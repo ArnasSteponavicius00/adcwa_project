@@ -31,6 +31,7 @@
 			</tr>
 		</table>
 	</c:forEach>
+	
 	<a href="/index.html">Home</a>
 	<a href="/newOrder.html">Add Order</a>
 	<a href="/showProducts.html">List Products</a>
