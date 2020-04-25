@@ -31,10 +31,10 @@ public class ProductController {
 	public String addProductPOST(@ModelAttribute("product") Product product) {
 		System.out.println("Product: "+ product.getpId() + " " + product.getpDesc() + " " +  product.getQtyInStock());
 		ps.saveProduct(product);
-		return "redirect:productAdded.html";
+		return "redirect:showProducts.html";
 	}
 	
-	@RequestMapping(value= "/productAdded.html", method=RequestMethod.GET)
+	@RequestMapping(value= "/showProducts.html", method=RequestMethod.GET)
 	public String productAddedGET(Model model) {
 		ArrayList<Product> products = ps.getAllProducts();
 		model.addAttribute("products", products);

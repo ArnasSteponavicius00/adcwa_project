@@ -8,13 +8,22 @@
 <title>Show Customers</title>
 </head>
 <body>
-	<h1>Customer: ${customer.cName} was added to DB</h1>
 	<h3>List of Customers:</h3>
 	
-	<ol>
-		<c:forEach items="${customers}" var="customer">
-			<li>${customer.cName}</li>
-		</c:forEach>
-	</ol>
+	<table>
+	  <tr>
+	   <th>Customer ID</th>
+	   <th>Name</th>
+	  </tr>
+	  <tr>
+	    <c:forEach items="${customers}" 
+	                 var="customer">
+	      <tr> 
+	        <td>${customer.cId}</td>
+	        <td>${customer.cName}</td>
+	      </tr>
+	    </c:forEach>
+	  </tr>
+	</table>
 </body>
 </html>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.sales.models.Customer;
 import com.sales.services.CustomerService;
 
+
 @Controller
 @SessionAttributes("customer")
 public class CustomerController {
@@ -26,18 +27,17 @@ public class CustomerController {
 		
 		return "addCustomer";
 	}
-	
+
 	@RequestMapping(value= "/addCustomer.html", method=RequestMethod.POST)
 	public String addCustomerPOST(@ModelAttribute("customer") Customer cust) {
-		System.out.println("Customer: "+ cust.getcId() + " " + cust.getcName());
 		cs.saveCustomer(cust);
-		return "redirect:customerAdded.html";
+		return "redirect:showCustomers.html";
 	}
 	
-	@RequestMapping(value= "/customerAdded.html", method=RequestMethod.GET)
-	public String customerAddedGET(Model model) {
-		ArrayList<Customer> customers = cs.getAllCustomers();
-		model.addAttribute("costumer", customers);
+	@RequestMapping(value= "/showCustomers.html", method=RequestMethod.GET)
+	public String productAddedGET(Model model) {
+		ArrayList<Customer> customer = cs.getAllCustomers();
+		model.addAttribute("customers", customer);
 		return "showCustomers";
 	}
 }
