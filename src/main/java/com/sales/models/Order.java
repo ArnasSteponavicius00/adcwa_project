@@ -14,18 +14,18 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="ORDERS")
+@Table(name="orders")
 public class Order {
 	@Id
 	@GeneratedValue
-	@Column(name="OID")
+	@Column(name="oid")
 	private Long oId;
 	
 	@Min(1)
-	@Column(name="QTY")
+	@Column(name="qty")
 	private int qty;
 	
-	@Column(name="ORDDATE")
+	@Column(name="orddate")
 	private String orderDate;
 
 	@ManyToOne
@@ -73,6 +73,7 @@ public class Order {
 	}
 
 	public void setOrderDate(String orderDate) {
+		orderDate = java.time.LocalDate.now().toString();
 		this.orderDate = orderDate;
 	}
 

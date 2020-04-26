@@ -14,9 +14,9 @@
 		<h3>${order.oId}</h3>
 		<table>
 			<tr>
-				<th>Order ID</th>
+				<th>Quantity</th>
 				<th>Order Date</th>
-				<th>Order Quantity</th>
+				<th>Customer ID</th>
 				<th>Description</th>
 				<th>Product ID</th>
 				<th>Description</th>
@@ -36,6 +36,6 @@
 	<a href="/newOrder.html">Add Order</a>
 	<a href="/showProducts.html">List Products</a>
 	<a href="/showCustomer.html">List Customers</a>
-	<a href="/showCustomers.html">Logout</a>
+	<a href="/logout">Logout</a>
 </body>
 </html>

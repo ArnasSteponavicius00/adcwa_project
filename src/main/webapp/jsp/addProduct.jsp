@@ -15,10 +15,12 @@
 			<tr>
 				<td>Product Description:</td>
 				<td><form:input path="pDesc"></form:input></td>
+				<td><form:errors path="pDesc">may not be empty</form:errors></td>
 			</tr>
 			<tr>
 				<td>Quantity in Stock:</td>
 				<td><form:input path="qtyInStock"></form:input></td>
+				<td><form:errors path="qtyInStock">must be greater than or equal to 0</form:errors></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="submit" value="Add" /></td>
