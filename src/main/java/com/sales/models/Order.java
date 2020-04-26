@@ -22,6 +22,8 @@ public class Order {
 	private Long oId;
 	
 	@Min(1)
+	@NotBlank
+	@NotEmpty
 	@Column(name="qty")
 	private int qty;
 	

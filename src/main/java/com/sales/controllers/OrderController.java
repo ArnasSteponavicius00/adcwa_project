@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -63,11 +66,17 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value= "/newOrder.html", method=RequestMethod.POST)
-	public String addOrderPOST(@ModelAttribute("order") Order order, @ModelAttribute("products") Product product) {
+	public String addOrderPOST(@Valid @ModelAttribute("order") Order order, Product product, Model model, BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return "newOrder";
+		}
+		
 		// variables
+		Product prod = new Product();
+		Customer cust = new Customer();
 		int prodQty;
 		int orderQty;
-		
 		//Get the products from orders
 		product = order.getProd();
 		
@@ -75,14 +84,22 @@ public class OrderController {
 		prodQty = product.getQtyInStock();
 		orderQty = order.getQty();
 		
-		//take them away everytime this methods is executed
-		prodQty -= orderQty;
-		
-		// Set the stock quantity in the products object
-		product.setQtyInStock(prodQty);
-		
-		os.saveOrder(order);
-		return "redirect:showOrders.html";
+		if(prodQty >= orderQty) {
+			//take them away everytime this methods is executed
+			prodQty -= orderQty;
+			
+			// Set the stock quantity in the products object
+			product.setQtyInStock(prodQty);
+			
+			os.saveOrder(order);
+			return "redirect:showOrders.html";
+		}
+		else {
+			//add the attributes for use in jsp file
+			model.addAttribute("customers", cust);	
+			model.addAttribute("products", prod);
+			return "orderError";
+		}
 	}
 	
 	@RequestMapping(value= "/showOrders.html", method=RequestMethod.GET)

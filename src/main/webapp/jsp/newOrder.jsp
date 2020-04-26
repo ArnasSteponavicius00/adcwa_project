@@ -16,13 +16,14 @@
 				<td>Customer:</td>
 				<td><form:select path="cust" items="${customers}" /></td>
 			</tr>
-			<tr>
+			<tr> 
 				<td>Product:</td>
 				<td><form:select path="prod" items="${products}" /></td>
 			</tr>
 			<tr>
 				<td>Quantity:</td>
 				<td><form:input path="qty"></form:input></td>
+				<td><form:errors path="qty"></form:errors></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="submit" value="Add" /></td>
