@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import com.sales.models.Order;
 
+//References for troubleshooting: https://stackoverflow.com/questions/54507552/how-to-join-results-of-multiple-tables-in-spring-jpa-repository
+//Lecture slides
 @Repository
 public interface OrderInterface extends CrudRepository<Order, Long>  {
 	@Modifying
