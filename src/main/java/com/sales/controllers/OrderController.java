@@ -22,8 +22,9 @@ import com.sales.services.CustomerService;
 import com.sales.services.OrderService;
 import com.sales.services.ProductService;
 
+//keep session attributes if an error occurs and page refreshes
 @Controller
-@SessionAttributes("order")
+@SessionAttributes({"order", "products", "customers"})
 public class OrderController {
 	@Autowired 
 	OrderService os;
@@ -74,6 +75,8 @@ public class OrderController {
 		
 		Product product = new Product();
 		Customer customer = new Customer();
+		int prodQty;
+		int orderQty;
 		
 		if(product.getpId() == null || customer.getcId() == null){
 			//if product id and customer id is null theyre not in the database anymore
@@ -83,8 +86,6 @@ public class OrderController {
 			return "orderErrorNull";
 		}
 		
-		int prodQty;
-		int orderQty;
 		//Get the products from orders
 		product = order.getProd();
 		
