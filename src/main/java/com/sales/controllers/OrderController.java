@@ -25,7 +25,7 @@ import com.sales.services.ProductService;
 @Controller
 @SessionAttributes("order")
 public class OrderController {
-	@Autowired
+	@Autowired 
 	OrderService os;
 	
 	@Autowired
@@ -66,15 +66,23 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value= "/newOrder.html", method=RequestMethod.POST)
-	public String addOrderPOST(@Valid @ModelAttribute("order") Order order, BindingResult result, Product product, Model model) {
+	public String addOrderPOST(@Valid @ModelAttribute("order") Order order, BindingResult result, Model model) {
 		
 		if(result.hasErrors()) {
 			return "newOrder";
 		}
 		
-		// variables
-		Product prod = new Product();
-		Customer cust = new Customer();
+		Product product = new Product();
+		Customer customer = new Customer();
+		
+		if(product.getpId() == null || customer.getcId() == null){
+			//if product id and customer id is null theyre not in the database anymore
+			//then throw error page
+			//add the attributes for use in jsp file
+			model.addAttribute("order", order);
+			return "orderErrorNull";
+		}
+		
 		int prodQty;
 		int orderQty;
 		//Get the products from orders
@@ -84,7 +92,7 @@ public class OrderController {
 		prodQty = product.getQtyInStock();
 		orderQty = order.getQty();
 		
-		if(prodQty <= orderQty) {
+		if(prodQty >= orderQty) {
 			//take them away everytime this methods is executed
 			prodQty -= orderQty;
 			
@@ -94,13 +102,13 @@ public class OrderController {
 			os.saveOrder(order);
 			return "redirect:showOrders.html";
 		}
-		else {
+		else if (prodQty <= orderQty) {
 			//add the attributes for use in jsp file
-			model.addAttribute("customers", cust);	
-			model.addAttribute("products", prod);
 			model.addAttribute("order", order);
 			return "orderError";
 		}
+		
+		return "redirect:showOrders.html";
 	}
 	
 	@RequestMapping(value= "/showOrders.html", method=RequestMethod.GET)

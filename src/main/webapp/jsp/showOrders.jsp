@@ -17,7 +17,7 @@
 				<th>Quantity</th>
 				<th>Order Date</th>
 				<th>Customer ID</th>
-				<th>Description</th>
+				<th>Customer Name</th>
 				<th>Product ID</th>
 				<th>Description</th>
 			</tr>

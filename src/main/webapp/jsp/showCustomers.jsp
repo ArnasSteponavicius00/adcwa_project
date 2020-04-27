@@ -11,7 +11,7 @@
 <body>
 	<h3>List of Customers:</h3>
 	<c:forEach items="${customers}" var="customer">
-		<h3>${customer.cId}|${customer.cName}</h3>
+		<h3>${customer.cId}	${customer.cName}</h3>
 		<table>
 			<tr>
 				<th>Order ID</th>
