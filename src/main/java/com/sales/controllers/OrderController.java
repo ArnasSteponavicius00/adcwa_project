@@ -66,7 +66,7 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value= "/newOrder.html", method=RequestMethod.POST)
-	public String addOrderPOST(@Valid @ModelAttribute("order") Order order, Product product, Model model, BindingResult result) {
+	public String addOrderPOST(@Valid @ModelAttribute("order") Order order, BindingResult result, Product product, Model model) {
 		
 		if(result.hasErrors()) {
 			return "newOrder";
@@ -84,7 +84,7 @@ public class OrderController {
 		prodQty = product.getQtyInStock();
 		orderQty = order.getQty();
 		
-		if(prodQty >= orderQty) {
+		if(prodQty <= orderQty) {
 			//take them away everytime this methods is executed
 			prodQty -= orderQty;
 			
@@ -98,6 +98,7 @@ public class OrderController {
 			//add the attributes for use in jsp file
 			model.addAttribute("customers", cust);	
 			model.addAttribute("products", prod);
+			model.addAttribute("order", order);
 			return "orderError";
 		}
 	}
