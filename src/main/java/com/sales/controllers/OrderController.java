@@ -37,10 +37,12 @@ public class OrderController {
 	
 	@RequestMapping(value= "/newOrder.html", method=RequestMethod.GET)
 	public String addOrderGET(Model model){
-		// Variables
+		// Variables and objects
 		Order order = new Order();	
+		//get the customers, products and add them to arraylists
 		ArrayList<Customer> customers = cs.getAllCustomers();
 		ArrayList<Product> products = ps.getAllProducts();
+		//used for mapping customers, products
 		Map<Long, String> customersList = new HashMap<Long, String>();
 		Map<Long, String> productsList = new HashMap<Long, String>();
 		String date = order.getOrderDate();
@@ -67,49 +69,52 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value= "/newOrder.html", method=RequestMethod.POST)
-	public String addOrderPOST(@Valid @ModelAttribute("order") Order order, BindingResult result, Model model) {
+	public String addOrderPOST(@Valid @ModelAttribute("order") Order order, BindingResult result, Product prod, Model model) {
 		
+		//error handling for invalid quantity
 		if(result.hasErrors()) {
 			return "newOrder";
 		}
 		
+		//variables and objects
 		Product product = new Product();
 		Customer customer = new Customer();
-		int prodQty;
-		int orderQty;
 		
-		if(product.getpId() == null || customer.getcId() == null){
-			//if product id and customer id is null theyre not in the database anymore
-			//then throw error page
+		//if product and customer is null theyre not in the database anymore
+		//then throw error page
+		if(product == null || customer == null){
 			//add the attributes for use in jsp file
 			model.addAttribute("order", order);
 			return "orderErrorNull";
 		}
 		
+		int prodQty;
+		int orderQty;
+		
 		//Get the products from orders
-		product = order.getProd();
+		prod = order.getProd();
 		
 		// Assign the quantities for products and orders
-		prodQty = product.getQtyInStock();
+		prodQty = prod.getQtyInStock();
 		orderQty = order.getQty();
 		
+		//Check whether the order quantity exceeds the product quantity in stock
+		//if its less than whats in stock save the order else return error page.
 		if(prodQty >= orderQty) {
 			//take them away everytime this methods is executed
 			prodQty -= orderQty;
 			
 			// Set the stock quantity in the products object
-			product.setQtyInStock(prodQty);
+			prod.setQtyInStock(prodQty);
 			
 			os.saveOrder(order);
 			return "redirect:showOrders.html";
 		}
-		else if (prodQty <= orderQty) {
+		else {
 			//add the attributes for use in jsp file
 			model.addAttribute("order", order);
 			return "orderError";
 		}
-		
-		return "redirect:showOrders.html";
 	}
 	
 	@RequestMapping(value= "/showOrders.html", method=RequestMethod.GET)

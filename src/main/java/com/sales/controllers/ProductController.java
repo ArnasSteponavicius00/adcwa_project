@@ -24,9 +24,9 @@ public class ProductController {
 	
 	@RequestMapping(value= "/addProduct.html", method=RequestMethod.GET)
 	public String addProductGET(Model model) {
+		//Variables and objects
 		Product prod = new Product();
-		
-		
+			
 		model.addAttribute("product", prod);
 		return "addProduct";
 	}
@@ -38,6 +38,7 @@ public class ProductController {
 			return "addProduct";
 		}
 		
+		//save the product to database
 		ps.saveProduct(product);
 		return "redirect:showProducts.html";
 	}

@@ -21,6 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	OrderService os;
 	
+	//Used for login form and handling logout
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		os.updateQuantity();
@@ -35,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");		
 	}
 	
+	//Allows for user to login with the username and password: user
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {		
 		auth.inMemoryAuthentication() 
@@ -45,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 	}
 
+	//encodes the password: user which is passed in from the function above
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();

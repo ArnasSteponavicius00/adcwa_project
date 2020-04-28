@@ -13,10 +13,12 @@ public class CustomerService {
 	@Autowired
 	CustomerInterface ci;
 	
+	//Uses crud repo method to save customer to repo
 	public void saveCustomer(Customer cust) {
 		ci.save(cust);
 	}
 	
+	//Uses interface crud to get all items found in customers table
 	public ArrayList<Customer> getAllCustomers() {
 		return (ArrayList<Customer>) ci.findAll();
 	}

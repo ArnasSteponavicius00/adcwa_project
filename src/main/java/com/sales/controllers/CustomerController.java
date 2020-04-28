@@ -24,7 +24,7 @@ public class CustomerController {
 
 	@RequestMapping(value = "/addCustomer.html", method = RequestMethod.GET)
 	public String addCustomerGET(Model model) {
-		// variables
+		// Create customer object
 		Customer cust = new Customer();
 		
 		model.addAttribute("customer", cust);
@@ -38,6 +38,7 @@ public class CustomerController {
 			return "addCustomer";
 		}
 
+		//save the customer to database
 		cs.saveCustomer(cust);
 		return "redirect:showCustomers.html";
 	}

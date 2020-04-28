@@ -11,7 +11,7 @@
 <body>
 	<h1>Error creating the following Order</h1>
 	
-	<h3>ERROR: Customer: ${order.cust.cId} and/or Product: ${order.prod.pId}</h3>
+	<h3>ERROR: Customer: ${order.cust.cId} and/or Product: ${order.prod.pId} does not exist</h3>
 	
 	<table>
 		<tr>
